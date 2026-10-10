@@ -6,9 +6,9 @@ public class Usuario {
     private String rut;
     private String correo;
     private String password;
-    private String rol;
+    private RolUsuario rol;
 
-    public Usuario(int id, String nombre, String rut, String correo, String password, String rol) {
+    public Usuario(int id, String nombre, String rut, String correo, String password, RolUsuario rol) {
         this.id = id;
         this.nombre = nombre;
         this.rut = rut;
@@ -17,7 +17,7 @@ public class Usuario {
         this.rol = rol;
     }
 
-    public Usuario(String nombre, String rut, String correo, String password, String rol) {
+    public Usuario(String nombre, String rut, String correo, String password, RolUsuario rol) {
         this.nombre = nombre;
         this.rut = rut;
         this.correo = correo;
@@ -65,11 +65,11 @@ public class Usuario {
         this.password = password;
     }
 
-    public String getRol() {
+    public RolUsuario getRol() {
         return rol;
     }
 
-    public void setRol(String rol) {
+    public void setRol(RolUsuario rol) {
         this.rol = rol;
     }
 

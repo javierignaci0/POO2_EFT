@@ -3,11 +3,11 @@ package model;
 public class Estudiante {
     private int id;
     private String nombre;
-    private int rut;
+    private String rut;
     private String curso;
     private String correo;
 
-    public Estudiante(int id, String nombre, int rut, String curso, String correo) {
+    public Estudiante(int id, String nombre, String rut, String curso, String correo) {
         this.id = id;
         this.nombre = nombre;
         this.rut = rut;
@@ -15,7 +15,7 @@ public class Estudiante {
         this.correo = correo;
     }
 
-    public Estudiante(String nombre, int rut, String curso, String correo) {
+    public Estudiante(String nombre, String rut, String curso, String correo) {
         this.nombre = nombre;
         this.rut = rut;
         this.curso = curso;
@@ -34,10 +34,10 @@ public class Estudiante {
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
-    public int getRut() {
+    public String getRut() {
         return rut;
     }
-    public void setRut(int rut) {
+    public void setRut(String rut) {
         this.rut = rut;
     }
     public String getCurso() {

@@ -5,28 +5,28 @@ public class Libro {
     private int id;
     private String titulo;
     private String autor;
-    private int isbn;
+    private String isbn;
     private String editorial;
     private int stock;
-    private Categoria id_categoria;
+    private int idCategoria;
 
-    public Libro(String titulo, String autor, int isbn, String editorial, int stock, Categoria id_categoria ) {
+    public Libro(String titulo, String autor, String isbn, String editorial, int stock, int idCategoria ) {
         this.titulo = titulo;
         this.autor = autor;
         this.isbn = isbn;
         this.editorial = editorial;
         this.stock = stock;
-        this.id_categoria = id_categoria;
+        this.idCategoria = idCategoria;
     }
 
-    public Libro(int id, String titulo, String autor, int isbn, String editorial, int stock, Categoria id_categoria ) {
+    public Libro(int id, String titulo, String autor, String isbn, String editorial, int stock, int idCategoria ) {
         this.id = id;
         this.titulo = titulo;
         this.autor = autor;
         this.isbn = isbn;
         this.editorial = editorial;
         this.stock = stock;
-        this.id_categoria = id_categoria;
+        this.idCategoria = idCategoria;
     }
 
     public int getId() {
@@ -53,11 +53,11 @@ public class Libro {
         this.autor = autor;
     }
 
-    public int getIsbn() {
+    public String getIsbn() {
         return isbn;
     }
 
-    public void setIsbn(int isbn) {
+    public void setIsbn(String isbn) {
         this.isbn = isbn;
     }
 
@@ -77,17 +77,17 @@ public class Libro {
         this.stock = stock;
     }
 
-    public Categoria getId_categoria() {
-        return id_categoria;
+    public int getIdCategoria() {
+        return idCategoria;
     }
-    public void setId_categoria(Categoria id_categoria) {
-        this.id_categoria = id_categoria;
+    public void setIdCategoria(int idCategoria) {
+        this.idCategoria = idCategoria;
     }
 
     @Override
     public String toString() {
         return "Libro{ id=" + id +  ", titulo=" + titulo + ", autor='" + autor + ", isbn=" + isbn +
-                ", editorial='" + editorial + ", stock=" + stock + ", id_categoria=" + id_categoria +
+                ", editorial='" + editorial + ", stock=" + stock + ", idCategoria=" + idCategoria +
                 '}';
     }
 }
