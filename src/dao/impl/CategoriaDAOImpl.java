@@ -20,7 +20,8 @@ public class CategoriaDAOImpl implements CategoriaDAO {
 
             return ps.executeUpdate() > 0;
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            System.out.println("Error al crear la categoria." + e.getMessage());
+            return false;
         }
     }
 
@@ -43,7 +44,8 @@ public class CategoriaDAOImpl implements CategoriaDAO {
                 categorias.add(categoria);
             }
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            System.out.println("Error al listar la categoria." + e.getMessage());
+            return null;
         }
 
         return categorias;
@@ -61,7 +63,8 @@ public class CategoriaDAOImpl implements CategoriaDAO {
 
             return ps.executeUpdate() > 0; // ROWS
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            System.out.println("Error al editar la categoria." + e.getMessage());
+            return false;
         }
     }
 
@@ -75,7 +78,8 @@ public class CategoriaDAOImpl implements CategoriaDAO {
             ps.setInt(1, id);
             return ps.executeUpdate() > 0;
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            System.out.println("Error al eliminar la categoria." + e.getMessage());
+            return false;
         }
     }
 }

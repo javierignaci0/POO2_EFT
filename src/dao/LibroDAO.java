@@ -1,7 +1,6 @@
 package dao;
 
 import model.Libro;
-import java.sql.SQLException;
 import java.util.List;
 
 public interface LibroDAO {
@@ -16,4 +15,6 @@ public interface LibroDAO {
 
     // DELETE
     boolean delete(int id);
+
+    Libro buscarPorId(int id);
 }

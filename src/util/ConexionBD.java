@@ -23,4 +23,17 @@ public class ConexionBD {
     public static Connection conectar() throws SQLException {
         return DriverManager.getConnection(URL, USER, PASSWORD);
     }
+
+    public static boolean existeDB(){
+        try (Connection conexion = conectar()){
+            return conexion != null;
+        }catch (SQLException e){
+            if (e.getErrorCode() == 1049){
+                return false;
+            }
+            System.out.println("Error de conexion: " + e.getMessage());
+            return false;
+        }
+    }
+
 }

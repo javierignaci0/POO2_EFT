@@ -31,7 +31,7 @@ public class ControladorLibros {
 
     public boolean editarLibro(Libro libro){
         if (libro.getTitulo().isEmpty() || libro.getAutor().isEmpty() || libro.getEditorial().isEmpty()
-                || libro.getIsbn().isEmpty() || libro.getIdCategoria() == 0 || libro.getStock() == 0){
+                || libro.getIsbn().isEmpty() || libro.getIdCategoria() == 0 || libro.getStock() < 0){
             System.out.println("Error en los valores al editar libro");
             return false;
         }
@@ -44,5 +44,9 @@ public class ControladorLibros {
             return false;
         }
         return libroDAO.delete(id);
+    }
+
+    public Libro buscarPorId(int id) {
+        return libroDAO.buscarPorId(id);
     }
 }

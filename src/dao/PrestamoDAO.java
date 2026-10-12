@@ -1,9 +1,6 @@
 package dao;
 
 import model.Prestamo;
-import model.Usuario;
-
-import java.sql.SQLException;
 import java.util.List;
 
 public interface PrestamoDAO {
@@ -19,4 +16,9 @@ public interface PrestamoDAO {
 
     // DELETE
     boolean delete(int id);
+
+    // REPORTES
+    String reporteLibrosMasPrestados();
+    String reporteLibrosEnPrestamo();
+    String reporteHistorialEstudiante(String rut);
 }

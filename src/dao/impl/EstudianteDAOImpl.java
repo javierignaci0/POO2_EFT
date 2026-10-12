@@ -26,13 +26,14 @@ public class EstudianteDAOImpl implements EstudianteDAO {
 
             return ps.executeUpdate() > 0;
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            System.out.println("Error al crear el estudiante" + e.getMessage());
+            return false;
         }
     }
 
     @Override
     public List<Estudiante> readAll(){
-        String sql = "SELECT (id, nombre, rut, curso, correo) FROM estudiantes ORDER BY id";
+        String sql = "SELECT id, nombre, rut, curso, correo FROM estudiantes ORDER BY id";
 
         List<Estudiante> estudiantes = new ArrayList<>();
 
@@ -53,7 +54,8 @@ public class EstudianteDAOImpl implements EstudianteDAO {
                 estudiantes.add(estudiante);
             }
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            System.out.println("Error al listar los estudiantes." + e.getMessage());
+            return null;
         }
 
         return estudiantes;
@@ -74,7 +76,8 @@ public class EstudianteDAOImpl implements EstudianteDAO {
 
             return ps.executeUpdate() > 0; // ROWS
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            System.out.println("Error al editar el estudiante" + e.getMessage());
+            return false;
         }
     }
 
@@ -88,7 +91,8 @@ public class EstudianteDAOImpl implements EstudianteDAO {
             ps.setInt(1, id);
             return ps.executeUpdate() > 0;
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            System.out.println("Error al eliminar el estudiante." + e.getMessage());
+            return false;
         }
     }
 }

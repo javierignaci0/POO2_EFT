@@ -44,4 +44,12 @@ public class ControladorUsuarios {
         }
         return usuarioDAO.delete(id);
     }
+
+    public Usuario iniciarSesion(String correo, String password) {
+        if (correo.isEmpty() || password.isEmpty()){
+            System.out.println("Error en los valores al iniciar Sesion");
+            return null;
+        }
+        return usuarioDAO.validarCredenciales(correo, password);
+    }
 }

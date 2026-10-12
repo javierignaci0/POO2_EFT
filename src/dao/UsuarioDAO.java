@@ -2,7 +2,6 @@ package dao;
 
 import model.Usuario;
 
-import java.sql.SQLException;
 import java.util.List;
 
 public interface UsuarioDAO {
@@ -18,4 +17,7 @@ public interface UsuarioDAO {
 
     // DELETE
     boolean delete(int id);
+
+    // LOGIN
+    Usuario validarCredenciales(String correo, String password);
 }

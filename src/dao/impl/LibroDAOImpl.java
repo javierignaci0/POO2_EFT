@@ -35,8 +35,8 @@ public class LibroDAOImpl implements LibroDAO {
                 return true;
             }
 
-        } catch (SQLException ex) {
-            System.out.println("SQLException: " + ex.getMessage());
+        } catch (SQLException e) {
+            System.out.println("Error al crear el libro." + e.getMessage());
             return false;
         }
         return false;
@@ -66,8 +66,8 @@ public class LibroDAOImpl implements LibroDAO {
 
                 libros.add(libro);
             }
-        }catch (SQLException ex){
-            System.out.println("SQLException: " + ex.getMessage());
+        }catch (SQLException e){
+            System.out.println("Error al listar los libros" + e.getMessage());
             return null;
         }
         return libros;
@@ -90,8 +90,8 @@ public class LibroDAOImpl implements LibroDAO {
 
             return ps.executeUpdate() > 0;
 
-        }catch (SQLException ex) {
-            System.out.println("SQLException: " + ex.getMessage());
+        }catch (SQLException e) {
+            System.out.println("Error al editar el libro." + e.getMessage());
             return false;
         }
     }
@@ -104,9 +104,37 @@ public class LibroDAOImpl implements LibroDAO {
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1, id);
             return ps.executeUpdate() > 0;
-        }catch (SQLException ex) {
-            System.out.println("SQLException: " + ex.getMessage());
+        }catch (SQLException e) {
+            System.out.println("Error al eliminar libro. " + e.getMessage());
             return false;
         }
+    }
+
+    public Libro buscarPorId(int id) {
+        String sql = "SELECT id, titulo, autor, isbn, editorial, stock, id_categoria FROM libros WHERE id = ?";
+        Libro libro = null;
+
+        try (Connection conexion = ConexionBD.getInstance().conectar()) {
+            PreparedStatement ps = conexion.prepareStatement(sql);
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+
+
+            if (rs.next()) {
+                libro = new Libro(
+                        rs.getInt("id"),
+                        rs.getString("titulo"),
+                        rs.getString("autor"),
+                        rs.getString("isbn"),
+                        rs.getString("editorial"),
+                        rs.getInt("stock"),
+                        rs.getInt("id_categoria")
+                );
+            }
+        } catch (SQLException e) {
+            System.out.println("Error al buscar libro por id." + e.getMessage());
+            return null;
+        }
+        return libro;
     }
 }

@@ -31,7 +31,8 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 
             return ps.executeUpdate() > 0;
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            System.out.println("Error al insertar el usuario." + e.getMessage());
+            return false;
         }
 
     }
@@ -39,7 +40,7 @@ public class UsuarioDAOImpl implements UsuarioDAO {
     @Override
     public List<Usuario> readAll(){
 
-        String sql = "SELECT (id, nombre, rut, correo, contraseña, rol) FROM usuarios ORDER BY id";
+        String sql = "SELECT id, nombre, rut, correo, contraseña, rol FROM usuarios ORDER BY id";
 
         List<Usuario> usuarios = new ArrayList<>();
 
@@ -60,7 +61,8 @@ public class UsuarioDAOImpl implements UsuarioDAO {
                 usuarios.add(usuario);
             }
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            System.out.println("Error al listar los usuarios." + e.getMessage());
+            return null;
         }
 
         return usuarios;
@@ -82,7 +84,8 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 
             return ps.executeUpdate() > 0;
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            System.out.println("Error al editar usuario." + e.getMessage());
+            return false;
         }
     }
 
@@ -94,11 +97,42 @@ public class UsuarioDAOImpl implements UsuarioDAO {
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1, id);
             return ps.executeUpdate() > 0;
-        
+
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            System.out.println("Error al eliminar el usuario." + e.getMessage());
+            return false;
         }
-        
+
     }
+
+    public Usuario validarCredenciales(String correo, String password) {
+        String sql = "SELECT id, nombre, rut, correo, contraseña, rol FROM usuarios WHERE correo = ? AND contraseña = ?";
+        Usuario usuarioLogueado = null;
+
+        try (Connection conexion = ConexionBD.getInstance().conectar()) {
+            PreparedStatement ps = conexion.prepareStatement(sql);
+            ps.setString(1, correo);
+            ps.setString(2, password);
+
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                usuarioLogueado = new Usuario(
+                        rs.getInt("id"),
+                        rs.getString("nombre"),
+                        rs.getString("rut"),
+                        rs.getString("correo"),
+                        rs.getString("contraseña"),
+                        RolUsuario.valueOf(rs.getString("rol").toUpperCase())
+                );
+            }
+        } catch (SQLException e) {
+            System.out.println("Error al intentar validar usuario." + e.getMessage());
+            return null;
+        }
+
+        return usuarioLogueado;
+    }
+
 }
 
